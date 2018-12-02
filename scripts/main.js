@@ -10,25 +10,40 @@ window.onresize = setSizes;
 setSizes();
 /* square-pixel */
 class Square {
-	constructor (){
+	constructor (x, y){
 		this.width = 10;
 		this.height = 10;
+		this.x = x;
+		this.y = y;
 	};
-	draw(x, y){
+	draw(){
 		ctx.fillStyle = "white";
-		ctx.fillRect(x, y, this.width, this.height);
+		ctx.fillRect(this.x, this.y, this.width, this.height);
+		console.log(`Экземпляр объекта ${this} перемещен`);
 	}
 }
 class Ball extends Square{
-	constructor(){
-		super();
-		this.speedX = 3;
-		this.speedY = 4;
+	constructor(x, y){
+		super(x, y);
+		this.speedX = 30;
+		this.speedY = 40;
+	};
+	move(){
+		this.x += this.speedX;
+		this.y += this.speedY;
+		if ((this.x > canvas.width) || (this.x < 0)) this.speedX = -this.speedX;
+		if ((this.y > canvas.height) || (this.y < 0)) this.speedY = -this.speedY;
 	}
 }
-let squarePixel = new Ball;
-for (let i = 0; i < 100; i++) {
-	setInterval (function(){
-		squarePixel.draw(10+i*10,200);
-	}, 3000);
-}
+let ball = new Ball(600, 20);
+let square = new Square(100, 100);
+ball.draw();
+square.draw();
+
+
+
+setInterval (function(){
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ball.move();
+	ball.draw();
+}, 10);
