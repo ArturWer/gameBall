@@ -19,14 +19,13 @@ class Square {
 	draw(){
 		ctx.fillStyle = "white";
 		ctx.fillRect(this.x, this.y, this.width, this.height);
-		console.log(`Экземпляр объекта ${this} перемещен`);
 	}
 }
 class Ball extends Square{
 	constructor(x, y){
 		super(x, y);
-		this.speedX = 30;
-		this.speedY = 40;
+		this.speedX = 10;
+		this.speedY = 20;
 	};
 	move(){
 		this.x += this.speedX;
@@ -35,15 +34,25 @@ class Ball extends Square{
 		if ((this.y > canvas.height) || (this.y < 0)) this.speedY = -this.speedY;
 	}
 }
+class Board {
+	constructor(x, y, width, height){
+		this.x = x;
+		this.width = width;
+		this.height = height;
+		this.y = canvas.height - this.height*2;
+	};
+	draw(){
+		ctx.fillStyle = "blue";
+		ctx.fillRect(this.x, this.y, this.width, this.height);
+	}
+}
 let ball = new Ball(600, 20);
-let square = new Square(100, 100);
+let board = new Board (100, 100, 200, 10);
 ball.draw();
-square.draw();
-
-
 
 setInterval (function(){
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ball.move();
 	ball.draw();
+	board.draw();
 }, 10);
