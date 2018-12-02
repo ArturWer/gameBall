@@ -19,5 +19,16 @@ class Square {
 		ctx.fillRect(x, y, this.width, this.height);
 	}
 }
-let squarePixel = new Square;
-squarePixel.draw(100,200);
+class Ball extends Square{
+	constructor(){
+		super();
+		this.speedX = 3;
+		this.speedY = 4;
+	}
+}
+let squarePixel = new Ball;
+for (let i = 0; i < 100; i++) {
+	setInterval (function(){
+		squarePixel.draw(10+i*10,200);
+	}, 3000);
+}
