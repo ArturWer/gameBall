@@ -50,6 +50,10 @@ let ball = new Ball(600, 20);
 let board = new Board (100, 100, 200, 10);
 ball.draw();
 
+canvas.addEventListener("mousemove", function (e) {
+	console.log(e.clientX);
+	board.x = e.clientX;
+})
 setInterval (function(){
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ball.move();
