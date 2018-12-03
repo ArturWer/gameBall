@@ -53,10 +53,11 @@ ball.draw();
 canvas.addEventListener("mousemove", function (e) {
 	console.log(e.clientX);
 	board.x = e.clientX;
-})
-setInterval (function(){
+});/*
+function loop(){
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ball.move();
 	ball.draw();
 	board.draw();
-}, 10);
+};
+window.requestAnimationFrame(loop);*/

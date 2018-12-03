@@ -13,3 +13,10 @@ body{
 canvas{
 	background-color: black;
 }
+p.count{
+	position: fixed;
+	top: 1rem;
+	right: 4rem;
+	font-size: 4rem;
+	background-color: green;
+}
