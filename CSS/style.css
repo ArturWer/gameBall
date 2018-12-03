@@ -6,12 +6,12 @@ html{
 }
 body{
 	margin: 0;
-	padding: 0;
-	box-sizing: content-box;
+	overflow: hidden;
 }
 /* document */
 canvas{
 	background-color: black;
+	box-sizing: border-box;
 }
 p.score{
 	position: fixed;
