@@ -14,9 +14,16 @@ canvas{
 	box-sizing: border-box;
 }
 p.score{
+	top: 5rem;
+	right: 3rem;
 	position: fixed;
+	font-size: 2rem;
+	background-color: green;
+}
+h2.lives{
 	top: 1rem;
-	right: 4rem;
-	font-size: 4rem;
+	right: 3rem;
+	position: fixed;
+	font-size: 2rem;
 	background-color: green;
 }
