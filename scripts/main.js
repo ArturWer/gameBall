@@ -1,5 +1,5 @@
 "use strict"
-let score = document.querySelector(".score");
+let scoreEl = document.querySelector(".score");
 let spanScore = document.querySelector(".score span");
 let spanLives = document.querySelector(".lives span");
 let isGameOver = false;
@@ -73,7 +73,9 @@ function startNewGame(){
 function gameOver(){
 	isGameOver = true;
 	lives = 3;
-	score = 0;
+	scores = 0;
+	ball.speedX = 10;
+	ball.speedY = 10;
 	drawStarScreen(ctx);
 }
 function loop(){
@@ -89,6 +91,9 @@ function checkColission(){
 	if((ball.y + ball.height) >= board.y){
 		if ( ((ball.x + ball.width) >= board.x) && ((ball.x + ball.width) <= (board.x + board.width)) ){
 			ball.speedY = -ball.speedY;
+			spanScore.textContent = ++scores;
+			ball.speedY--;
+			console.log(`Speed of the ball is: ${-ball.speedY}`);
 			//ball.speedX += board.speedX;
 		}
 	}
