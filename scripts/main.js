@@ -2,6 +2,7 @@
 let score = document.querySelector(".score");
 let spanScore = document.querySelector(".score span");
 let spanLives = document.querySelector(".lives span");
+let isGameOver = false;
 let scores = 0;
 let lives = 3;
 /* set sizes for canvas and change they when user resized them */
@@ -57,7 +58,7 @@ class Board {
 		ctx.fillRect(this.x, this.y, this.width, this.height);
 	}
 }
-function startNewGame(ctx){
+function drawStarScreen(ctx){
 	ctx.fillStyle = "green";
 	ctx.fillRect(0,0, canvas.width, canvas.height);
 	ctx.textAlign = "center";
@@ -65,10 +66,15 @@ function startNewGame(ctx){
 	ctx.fillStyle = "white";
 	ctx.fillText ("Press SPACE or F5", canvas.width/2, canvas.height/2);
 }
+function startNewGame(){
+		isGameOver = false;
+		loop();
+}
 function gameOver(){
-	ball.speedX = 0;
-	ball.speedY = 0;
-	startNewGame(ctx);
+	isGameOver = true;
+	lives = 3;
+	score = 0;
+	drawStarScreen(ctx);
 }
 function loop(){
 	spanLives.textContent = lives;
@@ -77,12 +83,13 @@ function loop(){
 	ball.move();
 	ball.draw();
 	board.draw();
-	window.requestAnimationFrame(loop);
+	if (!isGameOver) window.requestAnimationFrame(loop);
 };
 function checkColission(){
 	if((ball.y + ball.height) >= board.y){
 		if ( ((ball.x + ball.width) >= board.x) && ((ball.x + ball.width) <= (board.x + board.width)) ){
 			ball.speedY = -ball.speedY;
+			//ball.speedX += board.speedX;
 		}
 	}
 }
@@ -99,9 +106,9 @@ window.addEventListener("keypress", function(e){
 	} else if ((e.code === "KeyD") && (board.x + board.width < canvas.width)) {
 		board.x += board.speedX;
 	} else if ((e.code === "F5") || (e.code === "Space")) {
-		loop();
+		startNewGame();
 	}
 	console.log(`e.key ${e.key} e.code ${e.code}`);
 });
 
-startNewGame(ctx);
+drawStarScreen(ctx);
