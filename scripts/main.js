@@ -73,12 +73,19 @@ function gameOver(){
 function loop(){
 	spanLives.textContent = lives;
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	checkColission();
 	ball.move();
 	ball.draw();
 	board.draw();
 	window.requestAnimationFrame(loop);
 };
-
+function checkColission(){
+	if((ball.y + ball.height) >= board.y){
+		if ( ((ball.x + ball.width) >= board.x) && ((ball.x + ball.width) <= (board.x + board.width)) ){
+			ball.speedY = -ball.speedY;
+		}
+	}
+}
 let ball = new Ball(600, 20);
 let board = new Board (100, 100, 200, 10);
 
