@@ -35,7 +35,12 @@ class Ball extends Square{
 		this.x += this.speedX;
 		this.y += this.speedY;
 		if ((this.x > canvas.width) || (this.x < 0)) this.speedX = -this.speedX;
-		if ((this.y > canvas.height) || (this.y < 0)) this.speedY = -this.speedY;
+		if (this.y < 0) this.speedY = -this.speedY;
+		if (this.y > canvas.height)  {
+			lives--;
+			this.y = 0;
+			if (lives<0) gameOver();
+		}
 	}
 }
 class Board {
@@ -58,7 +63,11 @@ function startNewGame(ctx){
 	ctx.font = "5rem sans-serif";
 	ctx.fillStyle = "white";
 	ctx.fillText ("Press SPACE or F5", canvas.width/2, canvas.height/2);
-
+}
+function gameOver(){
+	ball.speedX = 0;
+	ball.speedY = 0;
+	startNewGame(ctx);
 }
 function loop(){
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -80,7 +89,9 @@ window.addEventListener("keypress", function(e){
 		board.x -= board.speedX;
 	} else if ((e.code === "KeyD") && (board.x + board.width < canvas.width)) {
 		board.x += board.speedX;
-	} else if ((e.code === "F5") || (e.code === "Space")) loop();
+	} else if ((e.code === "F5") || (e.code === "Space")) {
+		loop();
+	}
 	console.log(`e.key ${e.key} e.code ${e.code}`);
 });
 
