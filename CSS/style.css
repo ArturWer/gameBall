@@ -27,3 +27,10 @@ h2.lives{
 	font-size: 2rem;
 	background-color: green;
 }
+.highscore{
+	top: 9rem;
+	right: 3rem;
+	position: fixed;
+	font-size: 2rem;
+	background-color: green;
+}
