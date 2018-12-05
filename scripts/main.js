@@ -1,6 +1,7 @@
 "use strict"
 let score = document.querySelector(".score");
 let spanScore = document.querySelector(".score span");
+let spanLives = document.querySelector(".lives span");
 let scores = 0;
 let lives = 3;
 /* set sizes for canvas and change they when user resized them */
@@ -70,6 +71,7 @@ function gameOver(){
 	startNewGame(ctx);
 }
 function loop(){
+	spanLives.textContent = lives;
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ball.move();
 	ball.draw();
